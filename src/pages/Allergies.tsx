@@ -3,10 +3,8 @@ import { Plus, Shield, X, Trash2, AlertTriangle } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
-import type { Database } from '../types/database'
+import { Allergy, Severity } from '../types/database'
 
-type Allergy = Database['public']['Tables']['allergies']['Row']
-type Severity = Allergy['severity']
 
 const severityColors: Record<Severity, string> = {
   mild: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300',

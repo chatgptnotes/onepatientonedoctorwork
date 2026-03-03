@@ -7,7 +7,7 @@ import { useTheme } from '../context/ThemeContext'
 import { Sun, Moon } from 'lucide-react'
 
 export default function Signup() {
-  const navigate = useNavigate()
+  // navigate removed
   const { signUp, signInWithGoogle } = useAuth()
   const { theme, toggleTheme } = useTheme()
 

@@ -3,10 +3,8 @@ import { Plus, FileText, Search, Filter, Trash2, X, Calendar, Building2, User } 
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
-import type { Database } from '../types/database'
+import { HealthRecord, RecordType } from '../types/database'
 
-type HealthRecord = Database['public']['Tables']['health_records']['Row']
-type RecordType = Database['public']['Tables']['health_records']['Row']['record_type']
 
 const recordTypes: RecordType[] = ['diagnosis', 'lab_report', 'prescription', 'imaging', 'surgery', 'other']
 

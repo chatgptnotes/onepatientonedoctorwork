@@ -3,9 +3,8 @@ import { Save, User, Shield, Phone, MapPin, Calendar } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
-import type { Database } from '../types/database'
+import { Profile } from '../types/database'
 
-type Profile = Database['public']['Tables']['profiles']['Row']
 
 interface ProfileForm {
   full_name: string

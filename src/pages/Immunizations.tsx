@@ -3,9 +3,8 @@ import { Plus, Syringe, X, Trash2, CheckCircle, AlertCircle } from 'lucide-react
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
-import type { Database } from '../types/database'
+import { Immunization } from '../types/database'
 
-type Immunization = Database['public']['Tables']['immunizations']['Row']
 
 interface ImmForm {
   vaccine_name: string

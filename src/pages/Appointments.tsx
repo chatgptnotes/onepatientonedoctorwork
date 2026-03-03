@@ -3,10 +3,8 @@ import { Plus, Calendar, Clock, User, Building2, Video, X, Trash2, CheckCircle, 
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
-import type { Database } from '../types/database'
+import { Appointment, AppStatus } from '../types/database'
 
-type Appointment = Database['public']['Tables']['appointments']['Row']
-type AppStatus = Appointment['status']
 
 const statusColors: Record<AppStatus, string> = {
   scheduled: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300',
@@ -151,7 +149,7 @@ export default function Appointments() {
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">{field.label}</label>
                     <input
                       type={field.type}
-                      value={(form as Record<string, string>)[field.key]}
+                      value={(form as unknown as Record<string, string>)[field.key]}
                       onChange={e => setForm(prev => ({ ...prev, [field.key]: e.target.value }))}
                       placeholder={field.placeholder}
                       className="w-full px-3 py-2.5 border border-gray-300 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"

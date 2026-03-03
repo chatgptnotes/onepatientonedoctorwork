@@ -3,9 +3,8 @@ import { Plus, Pill, Search, Trash2, X, CheckCircle, XCircle } from 'lucide-reac
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
-import type { Database } from '../types/database'
+import { Medication } from '../types/database'
 
-type Medication = Database['public']['Tables']['medications']['Row']
 
 interface MedForm {
   name: string
