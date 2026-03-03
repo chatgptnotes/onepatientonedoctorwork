@@ -11,9 +11,9 @@ import {
 } from 'recharts'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
+import { computeHealthScore, getHealthStatus, getScoreGradient } from '../lib/healthScore'
 
 const healthTrend = [
-import { computeHealthScore, getHealthStatus, getScoreGradient } from '../lib/healthScore'
   { month: 'Sep', score: 72, bp: 128, glucose: 98 },
   { month: 'Oct', score: 75, bp: 125, glucose: 95 },
   { month: 'Nov', score: 78, bp: 122, glucose: 92 },

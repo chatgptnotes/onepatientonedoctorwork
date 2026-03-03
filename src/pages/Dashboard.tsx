@@ -11,6 +11,7 @@ import {
 } from 'recharts'
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
+import { computeHealthScore, getHealthStatus, getScoreGradient } from '../lib/healthScore'
 
 const healthTrend = [
   { month: 'Sep', score: 72, bp: 128, glucose: 98 },
@@ -41,6 +42,7 @@ export default function Dashboard() {
   const { user } = useAuth()
   const [stats, setStats] = useState<Stats>({ healthRecords: 0, appointments: 0, medications: 0, allergies: 0, immunizations: 0 })
   const [loading, setLoading] = useState(true)
+  const [computedHealthScore, setComputedHealthScore] = useState<number | null>(null)
   const displayName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'User'
 
   useEffect(() => {
@@ -48,12 +50,13 @@ export default function Dashboard() {
       if (!user) return
       const uid = user.id
 
-      const [records, appts, meds, allergies, immunizations] = await Promise.all([
+      const [records, appts, meds, allergies, immunizations, twinData] = await Promise.all([
         supabase.from('health_records').select('id', { count: 'exact', head: true }).eq('user_id', uid),
         supabase.from('appointments').select('id', { count: 'exact', head: true }).eq('user_id', uid),
         supabase.from('medications').select('id', { count: 'exact', head: true }).eq('user_id', uid).eq('is_active', true),
         supabase.from('allergies').select('id', { count: 'exact', head: true }).eq('user_id', uid),
         supabase.from('immunizations').select('id', { count: 'exact', head: true }).eq('user_id', uid),
+        supabase.from('digital_twins').select('*').eq('user_id', uid).single()
       ])
 
       setStats({
@@ -63,6 +66,17 @@ export default function Dashboard() {
         allergies: allergies.count ?? 0,
         immunizations: immunizations.count ?? 0,
       })
+
+      // Compute health score from digital twin data
+      if (twinData.data) {
+        const score = computeHealthScore(twinData.data)
+        setComputedHealthScore(score)
+      } else {
+        // Default demo data when no real data exists
+        const demoVitals = { heart_rate: 72, systolic_bp: 115, diastolic_bp: 78, spo2: 98, glucose_level: 85, bmi: 22.4, temperature: 37.0 }
+        const score = computeHealthScore(demoVitals)
+        setComputedHealthScore(score)
+      }
       setLoading(false)
     }
     fetchStats()
@@ -109,12 +123,12 @@ export default function Dashboard() {
       </div>
 
       {/* Health Score Banner */}
-      <div className="bg-gradient-to-r from-blue-600 to-cyan-600 rounded-2xl p-6 text-white">
+      <div className="className={`bg-gradient-to-r ${getScoreGradient(computedHealthScore) || 'from-blue-600 to-cyan-600'}`} rounded-2xl p-6 text-white">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="flex-1">
             <p className="text-blue-100 text-sm font-medium mb-1">Current Health Score</p>
             <div className="flex items-baseline gap-2">
-              <span className="text-5xl font-bold">87</span>
+              <span className="text-5xl font-bold">{computedHealthScore || 87}</span>
               <span className="text-blue-200 text-lg">/100</span>
               <span className="flex items-center gap-1 text-green-300 text-sm font-medium">
                 <TrendingUp className="w-4 h-4" /> +5 this month
