@@ -18,6 +18,25 @@ import Allergies from './pages/Allergies'
 import Profile from './pages/Profile'
 import Settings from './pages/Settings'
 import NotFound from './pages/NotFound'
+import SymptomChecker from './pages/SymptomChecker'
+import NutritionTracker from './pages/NutritionTracker'
+import FitnessLog from './pages/FitnessLog'
+import FamilyHealthHub from './pages/FamilyHealthHub'
+import InsuranceTracker from './pages/InsuranceTracker'
+import MedicalBillTracker from './pages/MedicalBillTracker'
+import HealthTimeline from './pages/HealthTimeline'
+import WaterIntakeTracker from './pages/WaterIntakeTracker'
+import VitalsLogger from './pages/VitalsLogger'
+import EmergencyCard from './pages/EmergencyCard'
+import PrescriptionScanner from './pages/PrescriptionScanner'
+import HealthGamification from './pages/HealthGamification'
+import PreventiveCare from './pages/PreventiveCare'
+import DoctorReviews from './pages/DoctorReviews'
+import Telemedicine from './pages/Telemedicine'
+import WearableIntegration from './pages/WearableIntegration'
+import ExportHealthData from './pages/ExportHealthData'
+import LabResultsViewer from './pages/LabResultsViewer'
+import MedicationReminders from './pages/MedicationReminders'
 
 function App() {
   return (
@@ -41,51 +60,42 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
 
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <Layout><Dashboard /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/digital-twin" element={
-              <ProtectedRoute>
-                <Layout><DigitalTwin /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/health-records" element={
-              <ProtectedRoute>
-                <Layout><HealthRecords /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/appointments" element={
-              <ProtectedRoute>
-                <Layout><Appointments /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/medications" element={
-              <ProtectedRoute>
-                <Layout><Medications /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/immunizations" element={
-              <ProtectedRoute>
-                <Layout><Immunizations /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/allergies" element={
-              <ProtectedRoute>
-                <Layout><Allergies /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/profile" element={
-              <ProtectedRoute>
-                <Layout><Profile /></Layout>
-              </ProtectedRoute>
-            } />
-            <Route path="/settings" element={
-              <ProtectedRoute>
-                <Layout><Settings /></Layout>
-              </ProtectedRoute>
-            } />
+            {[
+              { path: '/dashboard', el: <Dashboard /> },
+              { path: '/digital-twin', el: <DigitalTwin /> },
+              { path: '/health-records', el: <HealthRecords /> },
+              { path: '/appointments', el: <Appointments /> },
+              { path: '/medications', el: <Medications /> },
+              { path: '/immunizations', el: <Immunizations /> },
+              { path: '/allergies', el: <Allergies /> },
+              { path: '/profile', el: <Profile /> },
+              { path: '/settings', el: <Settings /> },
+              { path: '/symptom-checker', el: <SymptomChecker /> },
+              { path: '/nutrition', el: <NutritionTracker /> },
+              { path: '/fitness', el: <FitnessLog /> },
+              { path: '/family-health', el: <FamilyHealthHub /> },
+              { path: '/insurance', el: <InsuranceTracker /> },
+              { path: '/bills', el: <MedicalBillTracker /> },
+              { path: '/health-timeline', el: <HealthTimeline /> },
+              { path: '/water-intake', el: <WaterIntakeTracker /> },
+              { path: '/vitals', el: <VitalsLogger /> },
+              { path: '/emergency-card', el: <EmergencyCard /> },
+              { path: '/prescription-scanner', el: <PrescriptionScanner /> },
+              { path: '/gamification', el: <HealthGamification /> },
+              { path: '/preventive-care', el: <PreventiveCare /> },
+              { path: '/doctor-reviews', el: <DoctorReviews /> },
+              { path: '/telemedicine', el: <Telemedicine /> },
+              { path: '/wearables', el: <WearableIntegration /> },
+              { path: '/export-data', el: <ExportHealthData /> },
+              { path: '/lab-results', el: <LabResultsViewer /> },
+              { path: '/medication-reminders', el: <MedicationReminders /> },
+            ].map(r => (
+              <Route key={r.path} path={r.path} element={
+                <ProtectedRoute>
+                  <Layout>{r.el}</Layout>
+                </ProtectedRoute>
+              } />
+            ))}
 
             <Route path="/404" element={<NotFound />} />
             <Route path="*" element={<Navigate to="/404" replace />} />
