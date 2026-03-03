@@ -115,3 +115,18 @@ export interface ConsentRecord {
   expires_at: string | null
   created_at: string
 }
+
+export interface SharedProfile {
+  id: string
+  user_id: string
+  share_token: string
+  expires_at: string
+  is_active: boolean
+  include_vitals: boolean
+  include_records: boolean
+  include_medications: boolean
+  include_allergies: boolean
+  include_immunizations: boolean
+  viewed_count: number
+  created_at: string
+}
