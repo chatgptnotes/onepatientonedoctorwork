@@ -128,5 +128,10 @@ export interface SharedProfile {
   include_allergies: boolean
   include_immunizations: boolean
   viewed_count: number
+  access_pin: string | null
+  access_log: Array<{
+    timestamp: number
+    success: boolean
+  }> | null
   created_at: string
 }
