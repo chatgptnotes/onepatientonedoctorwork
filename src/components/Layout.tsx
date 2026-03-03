@@ -11,6 +11,8 @@ import {
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
 import toast from 'react-hot-toast'
+import GlobalSearch from './GlobalSearch'
+import MobileBottomNav from './MobileBottomNav'
 
 const navSections = [
   {
@@ -123,7 +125,7 @@ export default function Layout({ children }: LayoutProps) {
           </button>
         </div>
 
-        <nav className="flex-1 p-3 overflow-y-auto space-y-4">
+        <nav className="flex-1 p-3 overflow-y-auto space-y-4" role="navigation" aria-label="Main navigation">
           {navSections.map(section => (
             <div key={section.title}>
               <p className="px-3 py-1 text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">{section.title}</p>
@@ -169,22 +171,23 @@ export default function Layout({ children }: LayoutProps) {
 
       <div className="flex-1 lg:ml-64 flex flex-col min-h-screen">
         <header className="sticky top-0 z-10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 h-16 flex items-center gap-4">
-          <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+          <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg" aria-label="Open menu">
             <Menu className="w-5 h-5" />
           </button>
-          <div className="flex-1" />
-          <button className="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg relative">
+          <div className="flex-1 flex items-center justify-center"><GlobalSearch /></div>
+          <button className="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg relative" aria-label="Notifications">
             <Bell className="w-5 h-5" />
             <div className="absolute top-1.5 right-1.5 w-2 h-2 bg-blue-600 rounded-full" />
           </button>
-          <button onClick={toggleTheme} className="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg">
+          <button onClick={toggleTheme} className="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg" aria-label="Toggle theme">
             {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
           <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
             {avatarInitial}
           </div>
         </header>
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">{children}</main>
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 pb-20 lg:pb-8">{children}</main>
+        <MobileBottomNav />
       </div>
     </div>
   )

@@ -30,3 +30,40 @@ body {
 .dark ::-webkit-scrollbar-thumb {
   background: #475569;
 }
+
+/* Micro-interactions */
+button {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+button:active {
+  transform: scale(0.97);
+}
+
+/* Card hover lift */
+.hover\:shadow-md:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Focus indicators for accessibility */
+*:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Skeleton shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-pulse {
+  background-image: linear-gradient(90deg, transparent 25%, rgba(148,163,184,0.1) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Print styles */
+@media print {
+  .no-print { display: none !important; }
+}

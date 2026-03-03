@@ -391,14 +391,35 @@ export default function Landing() {
       {/* Footer */}
       <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-gray-900 dark:bg-gray-950 text-gray-400">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-lg flex items-center justify-center">
                 <Heart className="w-5 h-5 text-white" />
               </div>
               <span className="font-bold text-white">1Patient1Doctor</span>
             </div>
-            <p className="text-sm">© 2026 onepatientonedoctor.work · DPDP Compliant · HIPAA Standard · ABHA Integrated</p>
+            <div className="flex items-center gap-6 flex-wrap justify-center">
+              <div className="flex items-center gap-2 text-xs">
+                <Shield className="w-4 h-4 text-green-400" />
+                <span>ABDM Compliant</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs">
+                <Lock className="w-4 h-4 text-blue-400" />
+                <span>HIPAA Standard</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs">
+                <Shield className="w-4 h-4 text-purple-400" />
+                <span>DPDP Act Ready</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs">
+                <CheckCircle className="w-4 h-4 text-cyan-400" />
+                <span>FHIR R4</span>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm">© 2026 onepatientonedoctor.work</p>
+            <p className="text-xs text-gray-500">drmhope.com | A Bettroi Product | v1.0</p>
           </div>
         </div>
       </footer>

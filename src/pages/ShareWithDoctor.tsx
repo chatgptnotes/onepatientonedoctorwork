@@ -366,9 +366,20 @@ export default function ShareWithDoctor() {
                             onClick={() => copyToClipboard(share.share_token)}
                             className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
                             title="Copy link"
+                            aria-label="Copy share link"
                           >
                             <Copy className="w-4 h-4" />
                           </button>
+                          <a
+                            href={`https://wa.me/?text=${encodeURIComponent('View my health profile: ' + shareUrl)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 text-green-600 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors"
+                            title="Share via WhatsApp"
+                            aria-label="Share via WhatsApp"
+                          >
+                            <Share2 className="w-4 h-4" />
+                          </a>
                           <a
                             href={shareUrl}
                             target="_blank"

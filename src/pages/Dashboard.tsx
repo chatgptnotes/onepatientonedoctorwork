@@ -12,6 +12,7 @@ import {
 import { useAuth } from '../context/AuthContext'
 import { supabase } from '../lib/supabase'
 import { computeHealthScore, getHealthStatus, getScoreGradient } from '../lib/healthScore'
+import AnimatedHealthScore from '../components/AnimatedHealthScore'
 
 const healthTrend = [
   { month: 'Sep', score: 72, bp: 128, glucose: 98 },
@@ -123,7 +124,7 @@ export default function Dashboard() {
       </div>
 
       {/* Health Score Banner */}
-      <div className="className={`bg-gradient-to-r ${getScoreGradient(computedHealthScore) || 'from-blue-600 to-cyan-600'}`} rounded-2xl p-6 text-white">
+      <div className={`bg-gradient-to-r ${getScoreGradient(computedHealthScore) || 'from-blue-600 to-cyan-600'} rounded-2xl p-6 text-white`}>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div className="flex-1">
             <p className="text-blue-100 text-sm font-medium mb-1">Current Health Score</p>
@@ -135,6 +136,9 @@ export default function Dashboard() {
               </span>
             </div>
             <p className="text-blue-100 text-sm mt-2">Excellent — Keep maintaining your healthy lifestyle!</p>
+          </div>
+          <div className="hidden sm:block">
+            <AnimatedHealthScore score={computedHealthScore || 87} size={110} strokeWidth={8} />
           </div>
           <div className="w-full sm:w-64 h-24 sm:h-28">
             <ResponsiveContainer width="100%" height="100%">
@@ -187,7 +191,7 @@ export default function Dashboard() {
               <XAxis dataKey="month" tick={{ fontSize: 12, fill: '#9ca3af' }} />
               <YAxis tick={{ fontSize: 12, fill: '#9ca3af' }} domain={[60, 100]} />
               <Tooltip
-                contentStyle={{ backgroundColor: 'var(--tw-bg-white, #fff)', border: '1px solid #e5e7eb', borderRadius: '12px', fontSize: '12px' }}
+                contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid #e5e7eb', borderRadius: '12px', fontSize: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
               />
               <Area type="monotone" dataKey="score" stroke="#3b82f6" fill="url(#scoreGrad)" strokeWidth={2} name="Health Score" />
             </AreaChart>

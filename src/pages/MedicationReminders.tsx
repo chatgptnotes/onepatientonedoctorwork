@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Bell, Pill, CheckCircle, Clock, Flame, Calendar, Plus } from 'lucide-react'
+import toast from 'react-hot-toast'
 
 interface Reminder { id: number; medicine: string; dosage: string; time: string; taken: boolean }
 
@@ -15,6 +16,10 @@ export default function MedicationReminders() {
   ])
 
   function toggleTaken(id: number) {
+    const reminder = reminders.find(r => r.id === id)
+    if (reminder && !reminder.taken) {
+      toast.success(`${reminder.medicine} marked as taken`, { icon: '💊' })
+    }
     setReminders(reminders.map(r => r.id === id ? { ...r, taken: !r.taken } : r))
   }
 
